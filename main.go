@@ -20,8 +20,8 @@ type Event struct {
 }
 
 func upsertEvent(ctx context.Context, collection *mongo.Collection, event *Event) error {
-	filter := bson.D{{"_id", event.ID}}
-	update := bson.D{{"$set", event}}
+	filter := bson.M{"_id": event.ID}
+	update := bson.M{"$set": event}
 	upsert := true
 
 	_, err := collection.UpdateOne(ctx, filter, update, &options.UpdateOptions{
